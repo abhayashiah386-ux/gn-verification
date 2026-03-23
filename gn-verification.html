@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GN Group - Student Verification</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --y:#f5c518;--yd:#d4a800;--b:#1a3a7a;--bl:#e8edf7;
+  --bg:#f0f2f7;--white:#fff;--muted:#666;--border:#dde3f0;
+  --green:#1a7a3a;--gbg:#e8f5ed;--red:#c0392b;--rbg:#fdecea;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:#111;min-height:100vh;}
+
+/* HEADER */
+.hdr{background:var(--y);border-bottom:5px solid var(--b);padding:14px 16px;}
+.hdr-in{display:flex;align-items:center;gap:14px;max-width:620px;margin:0 auto;}
+.logo{width:54px;height:54px;border-radius:50%;background:var(--b);color:var(--y);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;flex-shrink:0;border:3px solid #fff;}
+.cn{font-size:16px;font-weight:800;color:var(--b);letter-spacing:.5px;}
+.cs{font-size:11px;color:var(--b);opacity:.85;margin-top:1px;}
+.ct{font-size:11px;font-weight:700;background:var(--b);color:var(--y);display:inline-block;padding:2px 8px;border-radius:4px;margin-top:3px;}
+
+/* TABS */
+.tabbar{display:flex;background:var(--b);max-width:620px;margin:0 auto;}
+.tab{flex:1;padding:12px 6px;border:none;background:transparent;color:rgba(255,255,255,.55);font-size:13px;font-weight:500;cursor:pointer;border-bottom:3px solid transparent;transition:all .15s;}
+.tab.active{color:var(--y);border-bottom-color:var(--y);font-weight:700;}
+
+/* PANELS */
+.panel{display:none;max-width:620px;margin:0 auto;padding:14px;}
+.panel.active{display:block;}
+
+/* CARD */
+.card{background:var(--white);border-radius:12px;padding:16px;margin-bottom:14px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(26,58,122,.07);}
+.ctitle{font-size:15px;font-weight:700;color:var(--b);margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--y);}
+
+/* HINT */
+.hint{background:var(--bl);border-left:4px solid var(--b);padding:10px 14px;border-radius:8px;font-size:13px;color:var(--b);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+
+/* INPUTS */
+.lbl{font-size:12px;color:var(--muted);display:block;margin-bottom:4px;margin-top:12px;font-weight:500;}
+.inp{width:100%;padding:10px 12px;border-radius:8px;border:1.5px solid var(--border);font-size:14px;background:#fff;color:#111;transition:border .15s;}
+.inp:focus{outline:none;border-color:var(--b);box-shadow:0 0 0 3px rgba(26,58,122,.1);}
+.mono{font-family:monospace;letter-spacing:1.5px;font-size:16px;text-align:center;font-weight:600;}
+
+/* BUTTONS */
+.btn{padding:10px 20px;border-radius:8px;border:none;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;}
+.bny{background:var(--y);color:var(--b);}
+.bny:hover{background:var(--yd);}
+.bnb{background:var(--b);color:#fff;}
+.bnb:hover{background:#0f2557;}
+.bnb.stop{background:var(--red);}
+.bng{background:#eee;color:#333;}
+.bng:hover{background:#ddd;}
+.full{width:100%;padding:13px;font-size:15px;border-radius:10px;}
+.f1{flex:1;}
+
+/* DIVIDER */
+.dvd{display:flex;align-items:center;gap:10px;margin:14px 0;color:var(--muted);font-size:13px;}
+.dvd::before,.dvd::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* CAMERA */
+.scanwrap{background:#000;border-radius:12px;overflow:hidden;position:relative;width:100%;aspect-ratio:4/3;margin:12px 0;}
+.viewport{width:100%;height:100%;}
+.viewport canvas,.viewport video{width:100%!important;height:100%!important;object-fit:cover;}
+.scanline{position:absolute;left:12%;right:12%;height:2.5px;background:var(--y);top:50%;animation:smove 2s infinite ease-in-out;pointer-events:none;}
+@keyframes smove{0%,100%{top:20%}50%{top:80%}}
+.corner{position:absolute;width:24px;height:24px;border-color:var(--y);border-style:solid;pointer-events:none;}
+.tl{top:12px;left:12px;border-width:3px 0 0 3px;}
+.tr{top:12px;right:12px;border-width:3px 3px 0 0;}
+.bl{bottom:12px;left:12px;border-width:0 0 3px 3px;}
+.br{bottom:12px;right:12px;border-width:0 3px 3px 0;}
+.scantxt{position:absolute;bottom:10px;left:0;right:0;text-align:center;color:rgba(255,255,255,.8);font-size:12px;pointer-events:none;}
+.scanst{font-size:13px;color:var(--muted);text-align:center;min-height:18px;margin:6px 0 10px;}
+
+/* RESULTS */
+.rok{background:var(--gbg);border:2px solid #5cb85c;border-radius:12px;padding:20px;margin-top:14px;text-align:center;}
+.rfail{background:var(--rbg);border:2px solid #e74c3c;border-radius:12px;padding:20px;margin-top:14px;text-align:center;}
+.ric{font-size:44px;margin-bottom:8px;}
+.rname{font-size:20px;font-weight:700;margin-bottom:4px;}
+.rdet{font-size:13px;margin-top:6px;opacity:.85;}
+.rid{font-family:monospace;font-size:15px;font-weight:700;letter-spacing:1px;margin-top:6px;}
+
+/* STATS */
+.srow{display:flex;gap:10px;margin-bottom:14px;}
+.sbox{flex:1;background:#fff;border-radius:10px;padding:14px 8px;text-align:center;border:1px solid var(--border);box-shadow:0 2px 6px rgba(26,58,122,.06);}
+.snum{font-size:28px;font-weight:800;color:var(--b);}
+.slbl{font-size:11px;color:var(--muted);margin-top:2px;font-weight:500;}
+
+/* ROWS */
+.row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #f0f2f7;}
+.row:last-child{border-bottom:none;}
+.ava{width:40px;height:40px;border-radius:50%;background:var(--b);color:var(--y);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;}
+.sn{font-size:14px;font-weight:600;}
+.ss{font-size:12px;color:var(--muted);margin-top:2px;}
+.badge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;}
+.bg{background:var(--gbg);color:var(--green);}
+.bb{background:var(--bl);color:var(--b);}
+.br2{background:var(--rbg);color:var(--red);}
+.by{background:#fff8dc;color:#7a5c00;}
+
+.mut{font-size:13px;color:var(--muted);text-align:center;padding:10px 0;}
+.msgt{font-size:13px;font-weight:500;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.ldr{text-align:center;padding:20px;color:var(--b);font-size:13px;}
+
+/* Firebase config box */
+.fbbox{background:#1a1a2e;color:#f5c518;font-family:monospace;font-size:12px;padding:14px;border-radius:8px;line-height:1.9;margin-top:10px;word-break:break-all;}
+.fbbox input{background:transparent;border:none;border-bottom:1px dashed #f5c518;color:#fff;font-family:monospace;font-size:12px;width:100%;outline:none;padding:2px 4px;}
+
+@media(max-width:380px){.cn{font-size:13px;}.g2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-in">
+    <div class="logo">GN</div>
+    <div>
+      <div class="cn">GN GROUP OF INSTITUTES</div>
+      <div class="cs">A Unit of Vinayak Education Society</div>
+      <div class="ct">Student Verification System</div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabbar">
+  <button class="tab active" onclick="sw('guard')">&#128737; Guard</button>
+  <button class="tab" onclick="sw('admin')">&#9881; Admin</button>
+  <button class="tab" onclick="sw('students')">&#128100; Students</button>
+  <button class="tab" onclick="sw('setup')">&#128293; Setup</button>
+</div>
+
+<!-- GUARD PANEL -->
+<div id="guard" class="panel active">
+  <div class="hint">&#128247; Phone se barcode scan karein ya Student ID type karein</div>
+  <div class="card">
+    <div class="ctitle">&#9989; Student Verify Karein</div>
+    <div id="scanWrap" class="scanwrap" style="display:none;">
+      <div id="interactive" class="viewport"></div>
+      <div class="scanline"></div>
+      <div class="corner tl"></div><div class="corner tr"></div>
+      <div class="corner bl"></div><div class="corner br"></div>
+      <div class="scantxt">ID card ka barcode camera ke saamne rakhen</div>
+    </div>
+    <div id="scanStatus" class="scanst"></div>
+    <button class="btn bnb full" id="camBtn" onclick="toggleCamera()">&#128247; Camera se Barcode Scan Karen</button>
+    <div class="dvd"><span>ya</span></div>
+    <label class="lbl">Student ID number type karein</label>
+    <input id="manualInput" class="inp mono" placeholder="Jaise: 24665243"/>
+    <div style="display:flex;gap:10px;margin-top:10px;">
+      <button class="btn bny f1" onclick="verifyManual()">&#10003; Verify Karen</button>
+      <button class="btn bng" onclick="clearAll()">Clear</button>
+    </div>
+    <div id="result"></div>
+  </div>
+  <div class="card">
+    <div class="ctitle">&#128203; Aaj Verified — <span id="vcount">0</span> Students</div>
+    <div id="vlog" class="mut">Abhi koi scan nahi hua.</div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin" class="panel">
+  <div class="card">
+    <div class="ctitle">&#128100; Naya Student Add Karein</div>
+    <div class="g2">
+      <div><label class="lbl">Student Name</label><input id="aName" class="inp" placeholder="Ashish Yadav"/></div>
+      <div><label class="lbl">Student ID (ID card se)</label><input id="aId" class="inp mono" placeholder="24665243"/></div>
+    </div>
+    <div class="g2">
+      <div>
+        <label class="lbl">Course</label>
+        <select id="aCourse" class="inp">
+          <option>B.Tech (CSE - AIML)</option><option>B.Tech (CSE)</option>
+          <option>B.Tech (ECE)</option><option>B.Tech (ME)</option>
+          <option>B.Tech (Civil)</option><option>B.Tech (IT)</option>
+          <option>MBA</option><option>MCA</option><option>BCA</option><option>BBA</option>
+        </select>
+      </div>
+      <div>
+        <label class="lbl">Batch</label>
+        <select id="aBatch" class="inp">
+          <option>2024-28</option><option>2023-27</option>
+          <option>2022-26</option><option>2021-25</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;margin-top:16px;">
+      <button class="btn bny" onclick="addStudent()">+ Add Student</button>
+      <span id="amsg" class="msgt"></span>
+    </div>
+  </div>
+</div>
+
+<!-- STUDENTS PANEL -->
+<div id="students" class="panel">
+  <div class="srow">
+    <div class="sbox"><div class="snum" id="sc1">0</div><div class="slbl">Total</div></div>
+    <div class="sbox"><div class="snum" style="color:var(--green);" id="sc2">0</div><div class="slbl">Verified</div></div>
+    <div class="sbox"><div class="snum" style="color:var(--red);" id="sc3">0</div><div class="slbl">Pending</div></div>
+  </div>
+  <div class="card">
+    <div class="ctitle">&#128198; Registered Students</div>
+    <input id="srch" class="inp" placeholder="&#128269; Naam ya ID se dhundein..." oninput="renderList()" style="margin-bottom:12px;"/>
+    <div id="slistDiv"><div class="mut">Loading...</div></div>
+  </div>
+</div>
+
+<!-- SETUP PANEL -->
+<div id="setup" class="panel">
+  <div class="card">
+    <div class="ctitle">&#128293; Firebase Setup</div>
+    <div style="font-size:13px;color:#555;line-height:1.8;margin-bottom:12px;">
+      Neeche apna <b>Firebase Config</b> paste karein aur <b>Save</b> dabain.<br>
+      <span style="color:var(--red);font-weight:600;">Ek baar save karo — hamesha ke liye kaam karega!</span>
+    </div>
+    <div class="fbbox">
+      apiKey: <input id="c_apiKey" placeholder="paste karo..."/><br>
+      authDomain: <input id="c_authDomain" placeholder="paste karo..."/><br>
+      projectId: <input id="c_projectId" placeholder="paste karo..."/><br>
+      storageBucket: <input id="c_storageBucket" placeholder="paste karo..."/><br>
+      messagingSenderId: <input id="c_messagingSenderId" placeholder="paste karo..."/><br>
+      appId: <input id="c_appId" placeholder="paste karo..."/>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;margin-top:14px;">
+      <button class="btn bny" onclick="saveConfig()">&#128190; Save &amp; Connect</button>
+      <span id="cfgmsg" class="msgt"></span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ctitle">&#128221; Setup Steps</div>
+    <div style="font-size:13px;color:#555;line-height:2;">
+      1. <b>console.firebase.google.com</b> pe jao<br>
+      2. New project banao: <b>gn-verification</b><br>
+      3. Web app add karo (&lt;/&gt;) → config copy karo<br>
+      4. Firestore Database → Test mode enable karo<br>
+      5. Upar config paste karo → Save dabao &#10003;
+    </div>
+  </div>
+</div>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<!-- Barcode -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+
+<script>
+// ── State ──────────────────────────────
+var allStudents = [];
+var verified    = [];
+var cameraOn    = false;
+var lastCode    = '';
+var lastTime    = 0;
+var dbReady     = false;
+var firestoreDB = null;
+
+// ── Firebase Config (localStorage se load) ──
+function loadSavedConfig() {
+  var cfg = localStorage.getItem('gn_fb_config');
+  if (!cfg) return;
+  try {
+    var c = JSON.parse(cfg);
+    document.getElementById('c_apiKey').value           = c.apiKey           || '';
+    document.getElementById('c_authDomain').value       = c.authDomain       || '';
+    document.getElementById('c_projectId').value        = c.projectId        || '';
+    document.getElementById('c_storageBucket').value    = c.storageBucket    || '';
+    document.getElementById('c_messagingSenderId').value= c.messagingSenderId|| '';
+    document.getElementById('c_appId').value            = c.appId            || '';
+    initFirebase(c);
+  } catch(e) {}
+}
+
+function saveConfig() {
+  var c = {
+    apiKey:            document.getElementById('c_apiKey').value.trim(),
+    authDomain:        document.getElementById('c_authDomain').value.trim(),
+    projectId:         document.getElementById('c_projectId').value.trim(),
+    storageBucket:     document.getElementById('c_storageBucket').value.trim(),
+    messagingSenderId: document.getElementById('c_messagingSenderId').value.trim(),
+    appId:             document.getElementById('c_appId').value.trim()
+  };
+  if (!c.apiKey || !c.projectId) {
+    msg('cfgmsg','apiKey aur projectId zaroori hai!','var(--red)');
+    return;
+  }
+  localStorage.setItem('gn_fb_config', JSON.stringify(c));
+  initFirebase(c);
+}
+
+function initFirebase(c) {
+  try {
+    if (!firebase.apps.length) firebase.initializeApp(c);
+    firestoreDB = firebase.firestore();
+    dbReady = true;
+    msg('cfgmsg','✓ Firebase connected!','var(--green)');
+    loadStudents();
+  } catch(e) {
+    msg('cfgmsg','Error: ' + e.message,'var(--red)');
+  }
+}
+
+// ── Load students from Firestore ──
+function loadStudents() {
+  if (!dbReady) return;
+  firestoreDB.collection('students').onSnapshot(function(snap) {
+    allStudents = [];
+    snap.forEach(function(d){ allStudents.push(Object.assign({docId:d.id}, d.data())); });
+    renderList();
+    updateStats();
+  });
+}
+
+// ── Tab switch ──
+function sw(tab) {
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById(tab).classList.add('active');
+  ['guard','admin','students','setup'].forEach(function(t,i){
+    document.querySelectorAll('.tab')[i].classList[t===tab?'add':'remove']('active');
+  });
+  if (tab==='students') renderList();
+  if (tab!=='guard' && cameraOn) stopCamera();
+}
+
+function ini(n){ return n.split(' ').map(function(w){return w[0]||'';}).join('').substring(0,2).toUpperCase(); }
+
+// ── Camera ──
+function toggleCamera(){ cameraOn ? stopCamera() : startCamera(); }
+
+function startCamera() {
+  document.getElementById('scanWrap').style.display = 'block';
+  var btn = document.getElementById('camBtn');
+  btn.textContent = '⏹ Camera Band Karein';
+  btn.classList.add('stop');
+  document.getElementById('scanStatus').textContent = 'Camera shuru ho raha hai...';
+
+  Quagga.init({
+    inputStream:{name:'Live',type:'LiveStream',target:document.getElementById('interactive'),
+      constraints:{facingMode:'environment',width:640,height:480}},
+    decoder:{readers:['code_128_reader','ean_reader','ean_8_reader','code_39_reader','codabar_reader','upc_reader','i2of5_reader']},
+    locate:true
+  }, function(err){
+    if (err){ document.getElementById('scanStatus').textContent='Camera nahi khula. Manual use karein.'; stopCamera(); return; }
+    Quagga.start();
+    cameraOn = true;
+    document.getElementById('scanStatus').textContent = 'ID card ka barcode camera ke saamne rakhen...';
+  });
+
+  Quagga.onDetected(function(data){
+    var code = data.codeResult.code;
+    var now = Date.now();
+    if (code===lastCode && now-lastTime<2500) return;
+    lastCode=code; lastTime=now;
+    stopCamera();
+    doVerify(code);
+  });
+}
+
+function stopCamera(){
+  if (cameraOn){ try{ Quagga.stop(); }catch(e){} }
+  cameraOn=false;
+  document.getElementById('scanWrap').style.display='none';
+  var btn=document.getElementById('camBtn');
+  btn.textContent='📷 Camera se Barcode Scan Karen';
+  btn.classList.remove('stop');
+  document.getElementById('scanStatus').textContent='';
+}
+
+// ── Verify ──
+function verifyManual(){
+  var v=document.getElementById('manualInput').value.trim();
+  if(v) doVerify(v);
+}
+
+function doVerify(raw){
+  document.getElementById('manualInput').value = raw;
+  var res = document.getElementById('result');
+
+  if (!dbReady) {
+    // Offline: local check only
+    var loc = allStudents.find(function(s){ return s.studentId && s.studentId===raw.trim(); });
+    loc ? showOK(loc) : showFail(raw);
+    if(loc) logIt(loc);
+    return;
+  }
+
+  res.innerHTML = '<div class="ldr">&#128269; Database check ho raha hai...</div>';
+
+  firestoreDB.collection('students').where('studentId','==',raw.trim()).get()
+    .then(function(snap){
+      if (!snap.empty){
+        var s = Object.assign({docId:snap.docs[0].id}, snap.docs[0].data());
+        showOK(s); logIt(s);
+      } else { showFail(raw); }
+    })
+    .catch(function(){ showFail(raw); });
+}
+
+function showOK(s){
+  document.getElementById('result').innerHTML =
+    '<div class="rok">'+
+    '<div class="ric">&#9989;</div>'+
+    '<div class="rname" style="color:var(--green);">'+s.name+'</div>'+
+    '<div class="rid" style="color:var(--b);">ID: '+s.studentId+'</div>'+
+    '<div class="rdet" style="color:var(--green);">'+(s.course||'')+' &bull; Batch '+(s.batch||'')+'</div>'+
+    '<div style="margin-top:12px;"><span class="badge bg">&#10003; Valid GN College Student</span></div>'+
+    '</div>';
+}
+
+function showFail(raw){
+  document.getElementById('result').innerHTML =
+    '<div class="rfail">'+
+    '<div class="ric">&#10060;</div>'+
+    '<div class="rname" style="color:var(--red);">Student Nahi Mila</div>'+
+    '<div class="rid" style="color:var(--red);">ID: '+raw+'</div>'+
+    '<div class="rdet" style="color:#922b21;">Ye GN College ka registered student nahi hai</div>'+
+    '</div>';
+}
+
+function logIt(s){
+  if (verified.find(function(v){ return v.studentId===s.studentId; })) return;
+  var t=new Date();
+  var time=String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');
+  verified.push({name:s.name,studentId:s.studentId,course:s.course||'',time:time});
+  renderLog();
+  document.getElementById('vcount').textContent=verified.length;
+  updateStats();
+}
+
+function renderLog(){
+  var d=document.getElementById('vlog');
+  if (!verified.length){ d.innerHTML='<div class="mut">Abhi koi scan nahi hua.</div>'; return; }
+  d.innerHTML=verified.slice().reverse().map(function(v){
+    return '<div class="row">'+
+      '<div class="ava">'+ini(v.name)+'</div>'+
+      '<div style="flex:1;"><div class="sn">'+v.name+'</div><div class="ss">'+v.studentId+' &bull; '+v.course+'</div></div>'+
+      '<div style="font-size:12px;color:#999;margin-right:6px;">'+v.time+'</div>'+
+      '<span class="badge bg">&#10003;</span>'+
+      '</div>';
+  }).join('');
+}
+
+function clearAll(){
+  document.getElementById('manualInput').value='';
+  document.getElementById('result').innerHTML='';
+  if(cameraOn) stopCamera();
+}
+
+// ── Add Student ──
+function addStudent(){
+  var name   = document.getElementById('aName').value.trim();
+  var sid    = document.getElementById('aId').value.trim();
+  var course = document.getElementById('aCourse').value;
+  var batch  = document.getElementById('aBatch').value;
+
+  if (!name||!sid){ msg('amsg','Name aur ID zaroori hai!','var(--red)'); return; }
+
+  if (!dbReady){ msg('amsg','Pehle Firebase setup karein (Setup tab)','var(--red)'); return; }
+
+  firestoreDB.collection('students').where('studentId','==',sid).get().then(function(snap){
+    if (!snap.empty){ msg('amsg','Ye ID already registered hai!','var(--red)'); return; }
+    firestoreDB.collection('students').add({
+      name:name, studentId:sid, course:course, batch:batch,
+      createdAt: new Date().toISOString()
+    }).then(function(){
+      msg('amsg','✓ '+name+' add ho gaya!','var(--green)');
+      document.getElementById('aName').value='';
+      document.getElementById('aId').value='';
+      setTimeout(function(){ document.getElementById('amsg').textContent=''; },3000);
+    }).catch(function(e){ msg('amsg','Error: '+e.message,'var(--red)'); });
+  });
+}
+
+// ── Student List ──
+function renderList(){
+  var srch=(document.getElementById('srch')?document.getElementById('srch').value:'').toLowerCase();
+  var filtered=allStudents.filter(function(s){
+    return s.name.toLowerCase().includes(srch)||(s.studentId&&s.studentId.toLowerCase().includes(srch));
+  });
+  updateStats();
+  var vids={};
+  verified.forEach(function(v){ vids[v.studentId]=true; });
+
+  if (!filtered.length){
+    document.getElementById('slistDiv').innerHTML='<div class="mut">Koi student nahi mila.</div>';
+    return;
+  }
+  document.getElementById('slistDiv').innerHTML=filtered.map(function(s){
+    return '<div class="row">'+
+      '<div class="ava">'+ini(s.name)+'</div>'+
+      '<div style="flex:1;"><div class="sn">'+s.name+'</div>'+
+      '<div class="ss">'+(s.studentId||'')+' &bull; '+(s.course?s.course.split('(')[0]:'')+'&bull; Batch '+(s.batch||'')+'</div></div>'+
+      (vids[s.studentId]?'<span class="badge bg">Verified</span>':'<span class="badge br2">Pending</span>')+
+      '</div>';
+  }).join('');
+}
+
+function updateStats(){
+  document.getElementById('sc1').textContent=allStudents.length;
+  document.getElementById('sc2').textContent=verified.length;
+  document.getElementById('sc3').textContent=allStudents.length-verified.length;
+}
+
+function msg(id,text,color){
+  var el=document.getElementById(id);
+  el.style.color=color; el.textContent=text;
+}
+
+// ── Init ──
+loadSavedConfig();
+</script>
+</body>
+</html>
