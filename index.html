@@ -13,13 +13,29 @@
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:#111;min-height:100vh;}
 
+/* LOGIN OVERLAY */
+.login-overlay{position:fixed;inset:0;background:var(--b);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px;}
+.login-box{background:#fff;border-radius:16px;padding:32px 28px;width:100%;max-width:360px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
+.login-logo{width:70px;height:70px;border-radius:50%;background:var(--b);color:var(--y);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;margin:0 auto 16px;}
+.login-title{font-size:18px;font-weight:800;color:var(--b);margin-bottom:4px;}
+.login-sub{font-size:12px;color:var(--muted);margin-bottom:24px;}
+.login-inp{width:100%;padding:12px 14px;border-radius:8px;border:1.5px solid var(--border);font-size:15px;margin-bottom:12px;text-align:center;letter-spacing:2px;}
+.login-inp:focus{outline:none;border-color:var(--b);}
+.login-btn{width:100%;padding:13px;background:var(--y);color:var(--b);border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;}
+.login-btn:hover{background:var(--yd);}
+.login-err{color:var(--red);font-size:13px;margin-top:8px;min-height:20px;}
+.login-hint{font-size:11px;color:#aaa;margin-top:16px;}
+
 /* HEADER */
 .hdr{background:var(--y);border-bottom:5px solid var(--b);padding:14px 16px;}
-.hdr-in{display:flex;align-items:center;gap:14px;max-width:620px;margin:0 auto;}
+.hdr-in{display:flex;align-items:center;justify-content:space-between;max-width:620px;margin:0 auto;}
+.hdr-left{display:flex;align-items:center;gap:14px;}
 .logo{width:54px;height:54px;border-radius:50%;background:var(--b);color:var(--y);display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;flex-shrink:0;border:3px solid #fff;}
-.cn{font-size:16px;font-weight:800;color:var(--b);letter-spacing:.5px;}
+.cn{font-size:15px;font-weight:800;color:var(--b);letter-spacing:.5px;}
 .cs{font-size:11px;color:var(--b);opacity:.85;margin-top:1px;}
 .ct{font-size:11px;font-weight:700;background:var(--b);color:var(--y);display:inline-block;padding:2px 8px;border-radius:4px;margin-top:3px;}
+.logout-btn{background:var(--b);color:var(--y);border:none;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0;}
+.logout-btn:hover{background:#0f2557;}
 
 /* TABS */
 .tabbar{display:flex;background:var(--b);max-width:620px;margin:0 auto;}
@@ -52,6 +68,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .bnb.stop{background:var(--red);}
 .bng{background:#eee;color:#333;}
 .bng:hover{background:#ddd;}
+.bnr{background:var(--red);color:#fff;}
+.bnr:hover{background:#a93226;}
 .full{width:100%;padding:13px;font-size:15px;border-radius:10px;}
 .f1{flex:1;}
 
@@ -87,8 +105,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .snum{font-size:28px;font-weight:800;color:var(--b);}
 .slbl{font-size:11px;color:var(--muted);margin-top:2px;font-weight:500;}
 
-/* ROWS */
-.row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #f0f2f7;}
+/* STUDENT ROWS */
+.row{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #f0f2f7;}
 .row:last-child{border-bottom:none;}
 .ava{width:40px;height:40px;border-radius:50%;background:var(--b);color:var(--y);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;}
 .sn{font-size:14px;font-weight:600;}
@@ -97,36 +115,77 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .bg{background:var(--gbg);color:var(--green);}
 .bb{background:var(--bl);color:var(--b);}
 .br2{background:var(--rbg);color:var(--red);}
-.by{background:#fff8dc;color:#7a5c00;}
 
 .mut{font-size:13px;color:var(--muted);text-align:center;padding:10px 0;}
 .msgt{font-size:13px;font-weight:500;}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .ldr{text-align:center;padding:20px;color:var(--b);font-size:13px;}
 
-/* Firebase config box */
+/* DELETE BTN */
+.del-btn{background:none;border:none;color:#ddd;font-size:16px;cursor:pointer;padding:4px 6px;border-radius:6px;transition:all .15s;flex-shrink:0;}
+.del-btn:hover{color:var(--red);background:var(--rbg);}
+
+/* CONFIRM MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:999;padding:20px;}
+.modal{background:#fff;border-radius:14px;padding:24px;max-width:320px;width:100%;text-align:center;}
+.modal-title{font-size:16px;font-weight:700;color:var(--b);margin-bottom:8px;}
+.modal-sub{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
+.modal-btns{display:flex;gap:10px;}
+
+/* FIREBASE BOX */
 .fbbox{background:#1a1a2e;color:#f5c518;font-family:monospace;font-size:12px;padding:14px;border-radius:8px;line-height:1.9;margin-top:10px;word-break:break-all;}
 .fbbox input{background:transparent;border:none;border-bottom:1px dashed #f5c518;color:#fff;font-family:monospace;font-size:12px;width:100%;outline:none;padding:2px 4px;}
+
+/* CHANGE PASSWORD */
+.pwbox{background:var(--bl);border-radius:10px;padding:14px;margin-top:12px;}
 
 @media(max-width:380px){.cn{font-size:13px;}.g2{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="hdr">
-  <div class="hdr-in">
-    <div class="logo">GN</div>
-    <div>
-      <div class="cn">GN GROUP OF INSTITUTES</div>
-      <div class="cs">A Unit of Vinayak Education Society</div>
-      <div class="ct">Student Verification System</div>
+<!-- LOGIN OVERLAY -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div class="login-logo">GN</div>
+    <div class="login-title">GN Group of Institutes</div>
+    <div class="login-sub">Student Verification System — Secure Login</div>
+    <input class="login-inp" id="loginPass" type="password" placeholder="Password dalein..." onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button class="login-btn" onclick="doLogin()">&#128274; Login Karen</button>
+    <div class="login-err" id="loginErr"></div>
+    <div class="login-hint">Default password: <b>GNC@2024</b><br>(Setup tab se change kar sakte hain)</div>
+  </div>
+</div>
+
+<!-- CONFIRM DELETE MODAL -->
+<div class="modal-bg" id="delModal" style="display:none;">
+  <div class="modal">
+    <div class="modal-title">&#9888; Student Delete Karen?</div>
+    <div class="modal-sub" id="delModalText">Kya aap sure hain? Ye action undo nahi hoga.</div>
+    <div class="modal-btns">
+      <button class="btn bng f1" onclick="closeDelModal()">Cancel</button>
+      <button class="btn bnr f1" onclick="confirmDelete()">Delete Karen</button>
     </div>
   </div>
 </div>
 
+<!-- HEADER -->
+<div class="hdr" id="mainApp" style="display:none;">
+  <div class="hdr-in">
+    <div class="hdr-left">
+      <div class="logo">GN</div>
+      <div>
+        <div class="cn">GN GROUP OF INSTITUTES</div>
+        <div class="cs">A Unit of Vinayak Education Society</div>
+        <div class="ct">Student Verification System</div>
+      </div>
+    </div>
+    <button class="logout-btn" onclick="doLogout()">&#128275; Logout</button>
+  </div>
+</div>
+
 <!-- TABS -->
-<div class="tabbar">
+<div class="tabbar" id="mainTabs" style="display:none;">
   <button class="tab active" onclick="sw('guard')">&#128737; Guard</button>
   <button class="tab" onclick="sw('admin')">&#9881; Admin</button>
   <button class="tab" onclick="sw('students')">&#128100; Students</button>
@@ -134,7 +193,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <!-- GUARD PANEL -->
-<div id="guard" class="panel active">
+<div id="guard" class="panel" style="display:none;">
   <div class="hint">&#128247; Phone se barcode scan karein ya Student ID type karein</div>
   <div class="card">
     <div class="ctitle">&#9989; Student Verify Karein</div>
@@ -163,7 +222,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <!-- ADMIN PANEL -->
-<div id="admin" class="panel">
+<div id="admin" class="panel" style="display:none;">
   <div class="card">
     <div class="ctitle">&#128100; Naya Student Add Karein</div>
     <div class="g2">
@@ -196,7 +255,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <!-- STUDENTS PANEL -->
-<div id="students" class="panel">
+<div id="students" class="panel" style="display:none;">
   <div class="srow">
     <div class="sbox"><div class="snum" id="sc1">0</div><div class="slbl">Total</div></div>
     <div class="sbox"><div class="snum" style="color:var(--green);" id="sc2">0</div><div class="slbl">Verified</div></div>
@@ -210,12 +269,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <!-- SETUP PANEL -->
-<div id="setup" class="panel">
+<div id="setup" class="panel" style="display:none;">
   <div class="card">
-    <div class="ctitle">&#128293; Firebase Setup</div>
-    <div style="font-size:13px;color:#555;line-height:1.8;margin-bottom:12px;">
-      Neeche apna <b>Firebase Config</b> paste karein aur <b>Save</b> dabain.<br>
-      <span style="color:var(--red);font-weight:600;">Ek baar save karo — hamesha ke liye kaam karega!</span>
+    <div class="ctitle">&#128274; Password Change Karein</div>
+    <div class="pwbox">
+      <label class="lbl" style="margin-top:0;">Purana Password</label>
+      <input id="oldPass" class="inp" type="password" placeholder="Current password"/>
+      <label class="lbl">Naya Password</label>
+      <input id="newPass" class="inp" type="password" placeholder="New password (min 6 characters)"/>
+      <label class="lbl">Naya Password Confirm</label>
+      <input id="confPass" class="inp" type="password" placeholder="Repeat new password"/>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:14px;">
+        <button class="btn bny" onclick="changePassword()">&#128274; Password Change Karo</button>
+        <span id="pwmsg" class="msgt"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ctitle">&#128293; Firebase Setup (Optional)</div>
+    <div style="font-size:13px;color:#555;line-height:1.8;margin-bottom:10px;">
+      Firebase connect karo toh data permanently save rahega.<br>
+      Bina Firebase ke bhi kaam karega (browser mein save hoga).
     </div>
     <div class="fbbox">
       apiKey: <input id="c_apiKey" placeholder="paste karo..."/><br>
@@ -230,26 +305,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <span id="cfgmsg" class="msgt"></span>
     </div>
   </div>
-  <div class="card">
-    <div class="ctitle">&#128221; Setup Steps</div>
-    <div style="font-size:13px;color:#555;line-height:2;">
-      1. <b>console.firebase.google.com</b> pe jao<br>
-      2. New project banao: <b>gn-verification</b><br>
-      3. Web app add karo (&lt;/&gt;) → config copy karo<br>
-      4. Firestore Database → Test mode enable karo<br>
-      5. Upar config paste karo → Save dabao &#10003;
-    </div>
-  </div>
 </div>
 
-<!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-<!-- Barcode -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
 
 <script>
-// ── State ──────────────────────────────
+// ── Constants ──
+var DEFAULT_PASS = 'GNC@2024';
+
+// ── State ──
 var allStudents = [];
 var verified    = [];
 var cameraOn    = false;
@@ -257,19 +323,89 @@ var lastCode    = '';
 var lastTime    = 0;
 var dbReady     = false;
 var firestoreDB = null;
+var pendingDelId = null;
+var pendingDelDocId = null;
 
-// ── Firebase Config (localStorage se load) ──
+// ── LOGIN ──
+function doLogin() {
+  var pass = document.getElementById('loginPass').value;
+  var saved = localStorage.getItem('gn_password') || DEFAULT_PASS;
+  if (pass === saved) {
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('mainApp').style.display = 'block';
+    document.getElementById('mainTabs').style.display = 'flex';
+    showPanel('guard');
+    loadSavedConfig();
+    loadStudents();
+  } else {
+    var err = document.getElementById('loginErr');
+    err.textContent = 'Galat password! Dobara try karein.';
+    document.getElementById('loginPass').value = '';
+    setTimeout(function(){ err.textContent=''; }, 3000);
+  }
+}
+
+function doLogout() {
+  if (cameraOn) stopCamera();
+  document.getElementById('loginOverlay').style.display = 'flex';
+  document.getElementById('mainApp').style.display = 'none';
+  document.getElementById('mainTabs').style.display = 'none';
+  document.querySelectorAll('.panel').forEach(function(p){ p.style.display='none'; });
+  document.getElementById('loginPass').value = '';
+}
+
+// ── CHANGE PASSWORD ──
+function changePassword() {
+  var old  = document.getElementById('oldPass').value;
+  var nw   = document.getElementById('newPass').value;
+  var conf = document.getElementById('confPass').value;
+  var saved = localStorage.getItem('gn_password') || DEFAULT_PASS;
+  var pmsg = document.getElementById('pwmsg');
+
+  if (old !== saved)  { setMsg('pwmsg','Purana password galat hai!','var(--red)'); return; }
+  if (nw.length < 6)  { setMsg('pwmsg','Password kam se kam 6 characters ka hona chahiye!','var(--red)'); return; }
+  if (nw !== conf)    { setMsg('pwmsg','Naya password match nahi kar raha!','var(--red)'); return; }
+
+  localStorage.setItem('gn_password', nw);
+  setMsg('pwmsg','✓ Password change ho gaya!','var(--green)');
+  document.getElementById('oldPass').value='';
+  document.getElementById('newPass').value='';
+  document.getElementById('confPass').value='';
+  setTimeout(function(){ pmsg.textContent=''; }, 3000);
+}
+
+// ── TAB SWITCH ──
+function sw(tab) {
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  ['guard','admin','students','setup'].forEach(function(t,i){
+    var el = document.getElementById(t);
+    if (t===tab) { el.style.display='block'; document.querySelectorAll('.tab')[i].classList.add('active'); }
+    else el.style.display='none';
+  });
+  if (tab==='students') renderList();
+  if (tab!=='guard' && cameraOn) stopCamera();
+}
+
+function showPanel(tab) {
+  ['guard','admin','students','setup'].forEach(function(t){
+    document.getElementById(t).style.display = t===tab ? 'block' : 'none';
+  });
+}
+
+function ini(n){ return n.split(' ').map(function(w){return w[0]||'';}).join('').substring(0,2).toUpperCase(); }
+
+// ── FIREBASE ──
 function loadSavedConfig() {
   var cfg = localStorage.getItem('gn_fb_config');
   if (!cfg) return;
   try {
     var c = JSON.parse(cfg);
-    document.getElementById('c_apiKey').value           = c.apiKey           || '';
-    document.getElementById('c_authDomain').value       = c.authDomain       || '';
-    document.getElementById('c_projectId').value        = c.projectId        || '';
-    document.getElementById('c_storageBucket').value    = c.storageBucket    || '';
-    document.getElementById('c_messagingSenderId').value= c.messagingSenderId|| '';
-    document.getElementById('c_appId').value            = c.appId            || '';
+    document.getElementById('c_apiKey').value            = c.apiKey||'';
+    document.getElementById('c_authDomain').value        = c.authDomain||'';
+    document.getElementById('c_projectId').value         = c.projectId||'';
+    document.getElementById('c_storageBucket').value     = c.storageBucket||'';
+    document.getElementById('c_messagingSenderId').value = c.messagingSenderId||'';
+    document.getElementById('c_appId').value             = c.appId||'';
     initFirebase(c);
   } catch(e) {}
 }
@@ -283,10 +419,7 @@ function saveConfig() {
     messagingSenderId: document.getElementById('c_messagingSenderId').value.trim(),
     appId:             document.getElementById('c_appId').value.trim()
   };
-  if (!c.apiKey || !c.projectId) {
-    msg('cfgmsg','apiKey aur projectId zaroori hai!','var(--red)');
-    return;
-  }
+  if (!c.apiKey||!c.projectId) { setMsg('cfgmsg','apiKey aur projectId zaroori hai!','var(--red)'); return; }
   localStorage.setItem('gn_fb_config', JSON.stringify(c));
   initFirebase(c);
 }
@@ -296,133 +429,110 @@ function initFirebase(c) {
     if (!firebase.apps.length) firebase.initializeApp(c);
     firestoreDB = firebase.firestore();
     dbReady = true;
-    msg('cfgmsg','✓ Firebase connected!','var(--green)');
+    setMsg('cfgmsg','✓ Firebase connected!','var(--green)');
     loadStudents();
-  } catch(e) {
-    msg('cfgmsg','Error: ' + e.message,'var(--red)');
+  } catch(e) { setMsg('cfgmsg','Error: '+e.message,'var(--red)'); }
+}
+
+// ── LOAD STUDENTS ──
+function loadStudents() {
+  if (dbReady) {
+    firestoreDB.collection('students').onSnapshot(function(snap) {
+      allStudents = [];
+      snap.forEach(function(d){ allStudents.push(Object.assign({docId:d.id},d.data())); });
+      renderList(); updateStats();
+    });
+  } else {
+    // LocalStorage fallback
+    var local = localStorage.getItem('gn_students');
+    allStudents = local ? JSON.parse(local) : [];
+    renderList(); updateStats();
   }
 }
 
-// ── Load students from Firestore ──
-function loadStudents() {
-  if (!dbReady) return;
-  firestoreDB.collection('students').onSnapshot(function(snap) {
-    allStudents = [];
-    snap.forEach(function(d){ allStudents.push(Object.assign({docId:d.id}, d.data())); });
-    renderList();
-    updateStats();
-  });
+function saveLocal() {
+  localStorage.setItem('gn_students', JSON.stringify(allStudents));
 }
 
-// ── Tab switch ──
-function sw(tab) {
-  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
-  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
-  document.getElementById(tab).classList.add('active');
-  ['guard','admin','students','setup'].forEach(function(t,i){
-    document.querySelectorAll('.tab')[i].classList[t===tab?'add':'remove']('active');
-  });
-  if (tab==='students') renderList();
-  if (tab!=='guard' && cameraOn) stopCamera();
-}
-
-function ini(n){ return n.split(' ').map(function(w){return w[0]||'';}).join('').substring(0,2).toUpperCase(); }
-
-// ── Camera ──
+// ── CAMERA ──
 function toggleCamera(){ cameraOn ? stopCamera() : startCamera(); }
 
 function startCamera() {
-  document.getElementById('scanWrap').style.display = 'block';
-  var btn = document.getElementById('camBtn');
-  btn.textContent = '⏹ Camera Band Karein';
-  btn.classList.add('stop');
-  document.getElementById('scanStatus').textContent = 'Camera shuru ho raha hai...';
-
+  document.getElementById('scanWrap').style.display='block';
+  var btn=document.getElementById('camBtn');
+  btn.textContent='⏹ Camera Band Karein'; btn.classList.add('stop');
+  document.getElementById('scanStatus').textContent='Camera shuru ho raha hai...';
   Quagga.init({
     inputStream:{name:'Live',type:'LiveStream',target:document.getElementById('interactive'),
       constraints:{facingMode:'environment',width:640,height:480}},
     decoder:{readers:['code_128_reader','ean_reader','ean_8_reader','code_39_reader','codabar_reader','upc_reader','i2of5_reader']},
     locate:true
-  }, function(err){
-    if (err){ document.getElementById('scanStatus').textContent='Camera nahi khula. Manual use karein.'; stopCamera(); return; }
-    Quagga.start();
-    cameraOn = true;
-    document.getElementById('scanStatus').textContent = 'ID card ka barcode camera ke saamne rakhen...';
+  },function(err){
+    if(err){ document.getElementById('scanStatus').textContent='Camera nahi khula. Manual use karein.'; stopCamera(); return; }
+    Quagga.start(); cameraOn=true;
+    document.getElementById('scanStatus').textContent='ID card ka barcode camera ke saamne rakhen...';
   });
-
   Quagga.onDetected(function(data){
-    var code = data.codeResult.code;
-    var now = Date.now();
-    if (code===lastCode && now-lastTime<2500) return;
+    var code=data.codeResult.code, now=Date.now();
+    if(code===lastCode&&now-lastTime<2500) return;
     lastCode=code; lastTime=now;
-    stopCamera();
-    doVerify(code);
+    stopCamera(); doVerify(code);
   });
 }
 
 function stopCamera(){
-  if (cameraOn){ try{ Quagga.stop(); }catch(e){} }
+  if(cameraOn){try{Quagga.stop();}catch(e){}}
   cameraOn=false;
   document.getElementById('scanWrap').style.display='none';
   var btn=document.getElementById('camBtn');
-  btn.textContent='📷 Camera se Barcode Scan Karen';
-  btn.classList.remove('stop');
+  btn.textContent='📷 Camera se Barcode Scan Karen'; btn.classList.remove('stop');
   document.getElementById('scanStatus').textContent='';
 }
 
-// ── Verify ──
+// ── VERIFY ──
 function verifyManual(){
   var v=document.getElementById('manualInput').value.trim();
   if(v) doVerify(v);
 }
 
 function doVerify(raw){
-  document.getElementById('manualInput').value = raw;
-  var res = document.getElementById('result');
+  document.getElementById('manualInput').value=raw;
+  var res=document.getElementById('result');
 
-  if (!dbReady) {
-    // Offline: local check only
-    var loc = allStudents.find(function(s){ return s.studentId && s.studentId===raw.trim(); });
+  if(!dbReady){
+    var loc=allStudents.find(function(s){return s.studentId&&s.studentId===raw.trim();});
     loc ? showOK(loc) : showFail(raw);
     if(loc) logIt(loc);
     return;
   }
 
-  res.innerHTML = '<div class="ldr">&#128269; Database check ho raha hai...</div>';
-
+  res.innerHTML='<div class="ldr">&#128269; Database check ho raha hai...</div>';
   firestoreDB.collection('students').where('studentId','==',raw.trim()).get()
     .then(function(snap){
-      if (!snap.empty){
-        var s = Object.assign({docId:snap.docs[0].id}, snap.docs[0].data());
-        showOK(s); logIt(s);
-      } else { showFail(raw); }
-    })
-    .catch(function(){ showFail(raw); });
+      if(!snap.empty){ var s=Object.assign({docId:snap.docs[0].id},snap.docs[0].data()); showOK(s); logIt(s); }
+      else showFail(raw);
+    }).catch(function(){ showFail(raw); });
 }
 
 function showOK(s){
-  document.getElementById('result').innerHTML =
-    '<div class="rok">'+
-    '<div class="ric">&#9989;</div>'+
+  document.getElementById('result').innerHTML=
+    '<div class="rok"><div class="ric">&#9989;</div>'+
     '<div class="rname" style="color:var(--green);">'+s.name+'</div>'+
     '<div class="rid" style="color:var(--b);">ID: '+s.studentId+'</div>'+
     '<div class="rdet" style="color:var(--green);">'+(s.course||'')+' &bull; Batch '+(s.batch||'')+'</div>'+
-    '<div style="margin-top:12px;"><span class="badge bg">&#10003; Valid GN College Student</span></div>'+
-    '</div>';
+    '<div style="margin-top:12px;"><span class="badge bg">&#10003; Valid GN College Student</span></div></div>';
 }
 
 function showFail(raw){
-  document.getElementById('result').innerHTML =
-    '<div class="rfail">'+
-    '<div class="ric">&#10060;</div>'+
+  document.getElementById('result').innerHTML=
+    '<div class="rfail"><div class="ric">&#10060;</div>'+
     '<div class="rname" style="color:var(--red);">Student Nahi Mila</div>'+
     '<div class="rid" style="color:var(--red);">ID: '+raw+'</div>'+
-    '<div class="rdet" style="color:#922b21;">Ye GN College ka registered student nahi hai</div>'+
-    '</div>';
+    '<div class="rdet" style="color:#922b21;">Ye GN College ka registered student nahi hai</div></div>';
 }
 
 function logIt(s){
-  if (verified.find(function(v){ return v.studentId===s.studentId; })) return;
+  if(verified.find(function(v){return v.studentId===s.studentId;})) return;
   var t=new Date();
   var time=String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');
   verified.push({name:s.name,studentId:s.studentId,course:s.course||'',time:time});
@@ -433,14 +543,12 @@ function logIt(s){
 
 function renderLog(){
   var d=document.getElementById('vlog');
-  if (!verified.length){ d.innerHTML='<div class="mut">Abhi koi scan nahi hua.</div>'; return; }
+  if(!verified.length){ d.innerHTML='<div class="mut">Abhi koi scan nahi hua.</div>'; return; }
   d.innerHTML=verified.slice().reverse().map(function(v){
-    return '<div class="row">'+
-      '<div class="ava">'+ini(v.name)+'</div>'+
+    return '<div class="row"><div class="ava">'+ini(v.name)+'</div>'+
       '<div style="flex:1;"><div class="sn">'+v.name+'</div><div class="ss">'+v.studentId+' &bull; '+v.course+'</div></div>'+
       '<div style="font-size:12px;color:#999;margin-right:6px;">'+v.time+'</div>'+
-      '<span class="badge bg">&#10003;</span>'+
-      '</div>';
+      '<span class="badge bg">&#10003;</span></div>';
   }).join('');
 }
 
@@ -450,32 +558,60 @@ function clearAll(){
   if(cameraOn) stopCamera();
 }
 
-// ── Add Student ──
+// ── ADD STUDENT ──
 function addStudent(){
-  var name   = document.getElementById('aName').value.trim();
-  var sid    = document.getElementById('aId').value.trim();
-  var course = document.getElementById('aCourse').value;
-  var batch  = document.getElementById('aBatch').value;
+  var name=document.getElementById('aName').value.trim();
+  var sid=document.getElementById('aId').value.trim();
+  var course=document.getElementById('aCourse').value;
+  var batch=document.getElementById('aBatch').value;
+  if(!name||!sid){ setMsg('amsg','Name aur ID zaroori hai!','var(--red)'); return; }
 
-  if (!name||!sid){ msg('amsg','Name aur ID zaroori hai!','var(--red)'); return; }
-
-  if (!dbReady){ msg('amsg','Pehle Firebase setup karein (Setup tab)','var(--red)'); return; }
-
-  firestoreDB.collection('students').where('studentId','==',sid).get().then(function(snap){
-    if (!snap.empty){ msg('amsg','Ye ID already registered hai!','var(--red)'); return; }
-    firestoreDB.collection('students').add({
-      name:name, studentId:sid, course:course, batch:batch,
-      createdAt: new Date().toISOString()
-    }).then(function(){
-      msg('amsg','✓ '+name+' add ho gaya!','var(--green)');
-      document.getElementById('aName').value='';
-      document.getElementById('aId').value='';
-      setTimeout(function(){ document.getElementById('amsg').textContent=''; },3000);
-    }).catch(function(e){ msg('amsg','Error: '+e.message,'var(--red)'); });
-  });
+  if(dbReady){
+    firestoreDB.collection('students').where('studentId','==',sid).get().then(function(snap){
+      if(!snap.empty){ setMsg('amsg','Ye ID already registered hai!','var(--red)'); return; }
+      firestoreDB.collection('students').add({name:name,studentId:sid,course:course,batch:batch,createdAt:new Date().toISOString()})
+        .then(function(){
+          setMsg('amsg','✓ '+name+' add ho gaya!','var(--green)');
+          document.getElementById('aName').value=''; document.getElementById('aId').value='';
+          setTimeout(function(){document.getElementById('amsg').textContent='';},3000);
+        }).catch(function(e){ setMsg('amsg','Error: '+e.message,'var(--red)'); });
+    });
+  } else {
+    if(allStudents.find(function(s){return s.studentId===sid;})){ setMsg('amsg','Ye ID already registered hai!','var(--red)'); return; }
+    allStudents.push({name:name,studentId:sid,course:course,batch:batch,docId:'local_'+Date.now()});
+    saveLocal(); renderList(); updateStats();
+    setMsg('amsg','✓ '+name+' add ho gaya!','var(--green)');
+    document.getElementById('aName').value=''; document.getElementById('aId').value='';
+    setTimeout(function(){document.getElementById('amsg').textContent='';},3000);
+  }
 }
 
-// ── Student List ──
+// ── DELETE STUDENT ──
+function askDelete(studentId, docId, name) {
+  pendingDelId = studentId;
+  pendingDelDocId = docId;
+  document.getElementById('delModalText').textContent = '"'+name+'" (ID: '+studentId+') ko delete karna chahte hain?';
+  document.getElementById('delModal').style.display='flex';
+}
+
+function closeDelModal() {
+  document.getElementById('delModal').style.display='none';
+  pendingDelId=null; pendingDelDocId=null;
+}
+
+function confirmDelete() {
+  if(!pendingDelId){ closeDelModal(); return; }
+  if(dbReady && pendingDelDocId && !pendingDelDocId.startsWith('local_')){
+    firestoreDB.collection('students').doc(pendingDelDocId).delete()
+      .then(function(){ closeDelModal(); })
+      .catch(function(e){ alert('Delete error: '+e.message); closeDelModal(); });
+  } else {
+    allStudents = allStudents.filter(function(s){ return s.studentId!==pendingDelId; });
+    saveLocal(); renderList(); updateStats(); closeDelModal();
+  }
+}
+
+// ── RENDER LIST ──
 function renderList(){
   var srch=(document.getElementById('srch')?document.getElementById('srch').value:'').toLowerCase();
   var filtered=allStudents.filter(function(s){
@@ -483,18 +619,17 @@ function renderList(){
   });
   updateStats();
   var vids={};
-  verified.forEach(function(v){ vids[v.studentId]=true; });
+  verified.forEach(function(v){vids[v.studentId]=true;});
 
-  if (!filtered.length){
-    document.getElementById('slistDiv').innerHTML='<div class="mut">Koi student nahi mila.</div>';
-    return;
-  }
+  if(!filtered.length){ document.getElementById('slistDiv').innerHTML='<div class="mut">Koi student nahi mila.</div>'; return; }
+
   document.getElementById('slistDiv').innerHTML=filtered.map(function(s){
     return '<div class="row">'+
       '<div class="ava">'+ini(s.name)+'</div>'+
       '<div style="flex:1;"><div class="sn">'+s.name+'</div>'+
-      '<div class="ss">'+(s.studentId||'')+' &bull; '+(s.course?s.course.split('(')[0]:'')+'&bull; Batch '+(s.batch||'')+'</div></div>'+
-      (vids[s.studentId]?'<span class="badge bg">Verified</span>':'<span class="badge br2">Pending</span>')+
+      '<div class="ss">'+(s.studentId||'')+' &bull; '+(s.course?s.course.split('(')[0]:'')+' &bull; Batch '+(s.batch||'')+'</div></div>'+
+      (vids[s.studentId]?'<span class="badge bg" style="margin-right:6px;">Verified</span>':'<span class="badge br2" style="margin-right:6px;">Pending</span>')+
+      '<button class="del-btn" onclick="askDelete(\''+s.studentId+'\',\''+s.docId+'\',\''+s.name+'\')" title="Delete">&#128465;</button>'+
       '</div>';
   }).join('');
 }
@@ -505,13 +640,16 @@ function updateStats(){
   document.getElementById('sc3').textContent=allStudents.length-verified.length;
 }
 
-function msg(id,text,color){
+function setMsg(id,text,color){
   var el=document.getElementById(id);
-  el.style.color=color; el.textContent=text;
+  if(el){el.style.color=color;el.textContent=text;}
 }
 
-// ── Init ──
-loadSavedConfig();
+// ── INIT ──
+// Enter key for login
+document.getElementById('loginPass').addEventListener('keydown',function(e){
+  if(e.key==='Enter') doLogin();
+});
 </script>
 </body>
 </html>
